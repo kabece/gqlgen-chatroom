@@ -1,0 +1,30 @@
+type Message {
+  id: ID!
+  text: String
+}
+
+type MessagesConnection {
+  edges: [MessagesEdge!]!
+  pageInfo: PageInfo!
+}
+
+type MessagesEdge {
+  cursor: ID!
+  node: Message
+}
+
+type PageInfo {
+  startCursor: ID!
+  endCursor: ID!
+  hasNextPage: Boolean
+}
+
+type ChatRoom {
+  id: ID!
+  name: String
+  messagesConnection(first: Int = 20, after: ID): MessagesConnection
+}
+
+type Query {
+  chatRoom(id: ID!): ChatRoom!
+}
